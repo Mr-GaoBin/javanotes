@@ -39,8 +39,6 @@ hostname 自定义名称
 hostnamectl set-hostname mycomputer
 ```
 
-​	
-
 >### 开关机命令
 
 ```shell

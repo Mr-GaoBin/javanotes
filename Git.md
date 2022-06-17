@@ -16,13 +16,15 @@ git push
 git push -f origin master			  -- 强制更新
 ```
 
-### 上传gitee图片无法显示问题
+## 上传gitee图片无法显示问题
 
-#### 腾讯云cos图床
+#### 1. 腾讯云cos图床
 
 ![image-20220520103708729](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202205201037796.png)
 
-## github
+### github
 
 >git config --global http.sslVerify false                      -- 关闭ssl校验
+
+#### 2. github图床
 
