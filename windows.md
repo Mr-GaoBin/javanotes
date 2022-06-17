@@ -55,16 +55,18 @@ start explorer
 新建文件夹.{20D04FE0-3AEA-1069-A2D8-08002B30309D}			-- 生成我的电脑图标
 ```
 
+![image-20220616170559865](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161705934.png)
+
 ```
 C:\Windows\System32\drivers\etc							    -- 修改本地host文件
 mrt                                                           -- 恶意删除检测
 %tepm%												     -- 缓存
 recent												     -- 操作记录
 regedit                          						   -- 注册表
-ipconfig/ flushdns                                           -- 刷新 DNS 解析缓存
-ipconfig/ displaydns							           -- 查看DNS缓存记录
+ipconfig -flushdns                                           -- 刷新 DNS 解析缓存
+ipconfig -displaydns							           -- 查看DNS缓存记录
 netstat -aon|findstr 11026							       -- 产看指定端口 
-taskkill /pid 9620 /f								       --关闭指定端口
+taskkill -f -pid 9620 								       --关闭指定端口
 get-executionpolicy									       --计算机执行策略
 set-executionpolicy remotesigned                              -- 更改计算机执行策略
 Get-ExecutionPolicy -List
@@ -122,9 +124,7 @@ Get-ExecutionPolicy -List
 
 ```apl
 1.msdn下载系统镜像【https://msdn.itellyou.cn/】
-
 2.制作启动盘，将镜像拷贝至同级目录下
-
 3.重启进入Bois界面,设置启动项启动盘优先级（安装完成需还原设置）
 ```
 
@@ -133,3 +133,44 @@ Get-ExecutionPolicy -List
 ```
 ```
 
+## 远程连接（需windoes专业版）
+
+>控制pc
+
+```
+dos命令：mstsc
+		输入--> 计算机名称
+				用户名
+				用户密码
+
+```
+
+> 被控制pc
+
+1. 开启远程桌面
+
+![image-20220616151522303](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161515368.png)
+
+2. 进入高级系统设置
+
+   <img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161524268.png" alt="image-20220616152408213" style="zoom:67%;" />
+
+3. 添加远程用户
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161525659.png" alt="image-20220616152517618" style="zoom:67%;" />
+
+-->
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161525835.png" alt="image-20220616152553796" style="zoom:67%;" />
+
+-->
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161526537.png" alt="image-20220616152628498" style="zoom:67%;" />
+
+-->找到对应用户点击添加
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161527046.png" alt="image-20220616152753006" style="zoom:67%;" />
+
+-->连接成功
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161529286.png" alt="image-20220616152922047" style="zoom: 33%;" />

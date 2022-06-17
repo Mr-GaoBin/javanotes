@@ -21,8 +21,7 @@ QuickDBD
 ### RuoYi若依管理系统
 
 ```
-ClassNotfoundException
-java开发中经常遇到java.lang.ClassNotfoundException异常，ClassNotfoundException异常一般就是编译时找不到类，Console台就会输出异常信息。一般情况下，我们都会rebuild或者clean一下工程，让项目重新编译一遍
+
 ```
 
 ### JavaEE
