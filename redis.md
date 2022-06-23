@@ -1,39 +1,146 @@
-# **redis**
+# **Redis**
 
-windows环境：
+## windows安装：
 
-### 配置redis
+* 配置redis
 
 ```
 redis-server.exe redis.windows.conf 
 ```
 
-本地连接
+* 本地连接
 
 ```
 redis-cli.exe -h 127.0.0.1 -p 6379 
 ```
 
+## linux安装Redis(需要c环境)
 
-
-
-
-### Linux环境：
+* 解压安装
 
 ```
-root:最高权限
 ```
 
+* docker镜像安装
+
+>docker run -p 6379:6379 --name myRedis  -v /data/redis/redis.conf:/etc/redis/redis.conf -v /data/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
+
+```shell
+docker run -p 6379:6379
+		   --name myRedis 
+		   -v /data/redis/redis.conf:/etc/redis/redis.conf  
+		   -v /data/redis/data:/data 
+		   -d redis 
+		   redis-server /etc/redis/redis.conf 
+		   --appendonly yes
+#appendonly 是否开启持久化
 ```
-c环境
 
+* 进入终端
 
-
+```shell
+#终端
+docker exec -it myRedis /bin/sh
+#登录
+docker exec -it myRedis Redis-cli -a 123456
+#密码
+-a
+#清空索引
+flushdb
 ```
 
+* redis.conf
 
+  ```properties
+  # Redis configuration file example.
+  
+  # ./redis-server /path/to/redis.conf
+  
+  # 1k => 1000 bytes
+  # 1kb => 1024 bytes
+  # 1m => 1000000 bytes
+  # 1mb => 1024*1024 bytes
+  # 1g => 1000000000 bytes
+  # 1gb => 1024*1024*1024 bytes
+  
+  ################################## INCLUDES ###################################
+  #网络
+  bind 127.0.0.1 -::1
+  
+  #保护模式
+  protected-mode no
+  
+  #超时时间
+  timeout 0
+  
+  #后台启动
+  daemonize yes
+  
+  pidfile /var/run/redis_6379.pid
+  
+  #日志
+  logfile ""
+  
+  #默认索引库数量
+  databases 16
+  
+  #rdb持久化
+  rdbcompression yes
+  
+  #rdb文件名称
+  dbfilename dump.rdb
+  
+  #rdb文件路径，当前目录下
+  dir ./
+  
+  #哨兵模式
+  ################################# REPLICATION #################################
+  
+  # Master-Replica replication. Use replicaof to make a Redis instance a copy of
+  # another Redis server. A few things to understand ASAP about Redis replication.
+  #
+  #   +------------------+      +---------------+
+  #   |      Master      | ---> |    Replica    |
+  #   | (receive writes) |      |  (exact copy) |
+  #   +------------------+      +---------------+
+  
+  
+  #持久化
+  appendonly no
+  
+  
+  #aof文件
+  appendfilename "appendonly.aof"
+  appenddirname "appendonlydir"
+  
+  #持久化策略
+  # +--------+------------+------------+------------+------------+------------+
+  # | factor | 100 hits   | 1000 hits  | 100K hits  | 1M hits    | 10M hits   |
+  # +--------+------------+------------+------------+------------+------------+
+  # | 0      | 104        | 255        | 255        | 255        | 255        |
+  # +--------+------------+------------+------------+------------+------------+
+  # | 1      | 18         | 49         | 255        | 255        | 255        |
+  # +--------+------------+------------+------------+------------+------------+
+  # | 10     | 10         | 18         | 142        | 255        | 255        |
+  # +--------+------------+------------+------------+------------+------------+
+  # | 100    | 8          | 11         | 49         | 143        | 255        |
+  
+  #密码
+  requirepass 123456
+  
+  ```
+  
+  
+  
+  >命令行修改配置
+  
+  ![image-20220623142340914](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206231425726.png)
+  
+  
+  
+  >配置文件修改
 
-
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206231426892.png" alt="image-20220623142658849" style="zoom:80%;" />
 
 
 
@@ -44,15 +151,15 @@ set key value   -- 存入键值对
 ```
 
 ```
-get name        -- 获取key对应值
+get key        -- 获取key对应值
 ```
 
 ```
-type name       -- key对应数据类型
+type key       -- key对应数据类型
 ```
 
 ```
-key *           -- 查看所有key
+keys *           -- 查看所有key
 ```
 
 ```

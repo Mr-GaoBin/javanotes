@@ -4,7 +4,7 @@
 
 官文地址（https://docs.docker.com/engine/reference/commandline/）
 
-#### yum安装docker
+## yum安装docker
 
 >1.较旧的 Docker 版本称为 docker 或 docker-engine 。如果已安装这些程序，请卸载它们以及相关的依赖项。
 
@@ -135,8 +135,6 @@ docker cp 容器id:容器内路径 主机路径
 
  
 
-
-
 >日志
 
 ```shell
@@ -168,7 +166,6 @@ docker top 容器id
 ```
 docker inspect 容器id
 docker inspect --format "{{.state.pid}}" nginx0
-
 ```
 
 >commit镜像
@@ -185,7 +182,7 @@ docker commit -a="创建者" -m="提交信息" 容器id 自定义镜像名称:�
 
 
 
-#### 常用命令
+## 常用命令
 
 ```shell
 docker 命令 --help					   -- 帮助命令
@@ -199,7 +196,7 @@ systemctl restart docker   				  #重启Docker守护进程
 
 
 
-#### 容器数据卷
+## 容器数据卷
 
 * 容器的持久化和同步操作
 
@@ -214,8 +211,8 @@ systemctl restart docker   				  #重启Docker守护进程
 * 具名挂载与匿名挂载
 
 ```shell
-#卷操作
-docker volume
+#卷操作  
+docker volume  
 #匿名卷挂载
 -v 容器内路径
 #具名卷挂载
@@ -229,6 +226,11 @@ docker volume inpect 卷名称
 ro#只读
 rw#可读可写
 top:一旦设置容器权限，将同步作用于挂载出来的文件
+
+#docker容器内的卷，在没有指定目录的情况下，统一目录/var/lib/docker/volume/...
+
+--volumes-from
+#挂载容器
 ```
 
 * 手动挂载
@@ -238,7 +240,7 @@ top:一旦设置容器权限，将同步作用于挂载出来的文件
 
 
 
-#### DockerFile
+## DockerFile
 
 ```apl
 构建DockerFile必须遵守
@@ -300,21 +302,99 @@ CMD	echo /bin/bash
 docker build  -f 文件名 -t 镜像名:版本号 .
 ```
 
-
-
-###### 	docker run运行镜像
-
-
-
 ###### docker push上传镜像
 
+```
+```
+
+
+
+## docker网络
+
+```shell
+#获取本机IP地址
+ip addr
+```
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206211548534.png" alt="image-20220621154839452" style="zoom: 67%;" />
+
+```apl
+docker容器之间的连接都是使用evth-pair技术（桥接模式）
+容器被删除，对应的网桥也会被删除
+```
+
+#### link
+
+```shell
+-- link  #不推荐使用
+```
+
+
+
+#### docker network
+
+```shell
+docker network --help
+[root@sunny ~]# docker network ls        #查看docker网络
+NETWORK ID     NAME      DRIVER    SCOPE 
+f4afa11cf5a2   bridge    bridge    local #默认，自定义也使用bridge桥接模式
+1ee220893d0d   host      host      local #和主机共享网络
+406606aaa892   none      null      local #不配置网络
+```
+
+* 创建一个自定义网络
+
+```shell
+docker network create --driver bridge  --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet(自定义网络名称)
+--driver  #网络模式
+--subnet  #子网
+--gateway #网关
+```
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206211035982.png" alt="image-20220621103523903" style="zoom:80%;" />
+
+* 自定义网络源数据
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206211118802.png" alt="image-20220621111848687" style="zoom: 67%;" />
+
+* connect网络连同
+
+```shell
+docker network connect 网络 容器 #将指定容器连接指定网络
+								#同一网络内的容器之间可以互相通信
+								#一个容器可以连同多个网络（容器的健康姓，安全性）
+```
+
+
+
+![image-20220621154155270](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206211541413.png)
+
+## docker compose(容器编排)
+
+* ab安装docker compose
+
+```
+
+
+
+
+
+```
+
+
+
+
+
+* yaml规则
+
+```
 
 
 
 
 
 
-#### docker网络
+```
 
 
 
@@ -322,11 +402,9 @@ docker build  -f 文件名 -t 镜像名:版本号 .
 
 
 
+## docker swarm
 
-
-
-
-#### 卸载Docker
+## 卸载Docker
 
 ```shell
 # 卸载依赖
@@ -336,13 +414,29 @@ rm -rf /var/lib/docker
 #  /var/lib/docker     docker的默认工作路径！！！
 ```
 
+## docker可视化工具
+
+* portainer
+
+```shell
+#docker安装portainer
+docker run -d -p 8088:9000\
+ --restart=always -v /var/run/docker.sock:/var/run/docker.sick --privileged=true portainer/portainer
+```
+
+* Rancher
+
+```shell
+
+```
+
+## 练习
 
 
-#### 练习
 
 ```shell
 #docker安装启动tomcat
-docker run-d -p 3355:8080 --name tomcat01 tomcat
+docker run-d -p 3355:8080 --name mtomcat tomcat
 #进入tomcat容器
 docker exec -it tomcat01 /bin/bash
 cp webapps.dist/* webapps
@@ -354,10 +448,17 @@ docker run -d --name elasticsrerch01 -p 9200:9200
                                      elasticsrerch:7.6.2								
 ```
 
-#### docker可视化工具
+
+
+* 模拟安装redis集群
+
+```shell
+
+
+
+
+
+
 
 ```
-```
-
-
 

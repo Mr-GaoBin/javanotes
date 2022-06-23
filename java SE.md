@@ -68,11 +68,7 @@ C:\Users\74056\Desktop\物流需>javadoc -encoding UTF-8 -charset UTF-8 HelloWor
 
 
 
-
-
-## 
-
-### 数组的使用
+## 数组的使用
 
 ```java
 //定义方式1  
@@ -108,7 +104,7 @@ System.out.println("Max is " + max);
 
 ```
 
-### 二维数组
+#### 二维数组
 
 ```java
 //定义二维数组
@@ -141,13 +137,27 @@ for (int j = 0; j <i.length ; j++) {
 }
 ```
 
-### 8种基本数据类型
+## 8种基本数据类型
 
 #### 基本数据类型分为三类：
 
-1. 数值型：数值型又分为整数型和浮点型；
+1. 数值型：数值型又分为整数型和浮点型（byte,short,int,long,float,double）；
 2. 字符型（char)
 3. 布尔型（boolean)
+
+#### 转换方式
+
+按照转换方式，有两种（**注意**：boolean类型不参与类型转换）：
+
+- 自动类型转换：
+  范围小的数据类型直接转换成范围大的数据类型，小->大。
+- 强制类型转换：
+  范围大的数据类型强制转换成范围小的数据类型，大->小，会造成精度丢失，尽量不使用浮点数参**与运算**。
+
+#### 转换规则
+
+​		自动类型转换，也称为“隐式类型转换，就是把范围小的数据类型直接转换成范围大的数据类型。		byte、short、char—>int—>long—>float—>double
+​		byte、short、char相互之间不转换，他们参与运算首先转换为int类型
 
 #### 为什么会有基本数据类型？
 
@@ -170,7 +180,7 @@ for (int j = 0; j <i.length ; j++) {
 | char    | 2字节        | 0~2^16 -1              | '\u0000'        |
 | boolean | 1字节        | true/false             | false           |
 
-### 包装类
+#### 包装类
 
 基本数据类型，使用起来非常方便，但是没有对应的方法来操作这些基本类型的数据，可以使用一个类，把基本数据类型的数据装起来，这个类叫做包装类（wrapper）。这样我们可以调用类中的方法。
 
@@ -191,16 +201,138 @@ for (int j = 0; j <i.length ; j++) {
 
 
 
+## java支持的运算符
+
+>- 算术运算符：+，-，*，/，%（膜运算：取余），++，–
+>- 赋值运算符：=
+>- 关系运算符：> , < , >= , <= , ==（java里等于要用两个等于号） , != （不等于） instapceof
+>- 逻辑运算符：&&（与）,||（或）,!（非）
+>- 位运算符：&，|，^，~，>>，<<，>>>
+>- 条件运算符？：
+>- 扩展赋值运算符：+=，-=，*=，/=
+
+#### 运算符的优先级
+
+| 优先级 |                      运算符                      | 顺序     |
+| ------ | :----------------------------------------------: | -------- |
+| 1      |                    ()、[]、{}                    | 从左向右 |
+| 2      |                !、+、-、~、++、--                | 从右向左 |
+| 3      |                     *、/、%                      | 从左向右 |
+| 4      |                       +、-                       | 从左向右 |
+| 5      |                    «、»、>>>                     | 从左向右 |
+| 6      |             <、<=、>、>=、instanceof             | 从左向右 |
+| 7      |                      ==、!=                      | 从左向右 |
+| 8      |                        &                         | 从左向右 |
+| 9      |                        ^                         | 从左向右 |
+| 10     |                        \|                        | 从左向右 |
+| 11     |                        &&                        | 从左向右 |
+| 12     |                       \|\|                       | 从左向右 |
+| 13     |                        ?:                        | 从右向左 |
+| 14     | =、+=、-=、*=、/=、&=、\|=、^=、~=、«=、»=、>>>= | 从右向左 |
+
+#### 位运算
+
+
+
+
+
+## 常用类
+
+#### Math
+
+
+
+#### BigDecimal
 
 
 
 
 
 
-## Exception
 
+## 内部类
 
+* 成员内部类
 
->ClassNotfoundException
+* 静态内部类
+
+* 局部内部类
+
+* 匿名内部类
+
+## Error和Exception的区别: 
+
+>* Error通常是灾难性的致命的错误，是程序无法控制和处理的，当出现这些异常时，Java虚拟机(JVM)一般会选择终止线程; 
+>
+>* Exception通常情况下是可以被程序处理的，并且在程序中应该尽可能的去处理这些异常。
+
+### Error
+
+>* Error类对象由Java虚拟机生成并抛出，大多数错误与代码编写者所执行的操作无关。
+>* Java虚拟机运行错误(Virtual MachineError)，当JVM不再有继续执行操作所需的内存资源
+>  时，将出现OutOfMemoryError。这些异常发生时，Java虚拟机(JVM) 一般会选择线程终
+>  止;
+>* 还有发生在虚拟机试图执行应用时，如类定义错误(NoClassDefFoundError) 、链接错误
+>  (LinkageError)。这些错误是不可查的，因为它们在应用程序的控制和处理能力之外,而且
+>  绝大多数是程序运行时不允许出现的状况。
+
+### Exception
+
+![image-20220622162932339](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206221629435.png)
+
+#### CheckedException和RuntimeException的区别
+
+>* 在Exception分支中有一个重要的子类RuntimeException (运行时异常)，不需要用throws 声明抛出 异常对象所属类，也可以不用throw 抛出异常对象或异常引用。对于调用该方法，也不需要放于 try-catch 代码块中。（***如果捕获它，就可能发生程序代码错误被掩盖在运行中无法察觉**)*,这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生
+>
+>* 而检查异常 : 一旦 用throw 抛出异常，如果当前方法 可处理异常，那么直接在该方法内用try-catch 去处理。如果当前方法不具备处理该异常的能力，那么就必须在 参数列表后方法体前用 throws 声明 异常 所属类，交给调用该方法的 调用者(方法) 去处理 。
+
+#### ClassNotfoundException
+
 >java开发中经常遇到java.lang.ClassNotfoundException异常，ClassNotfoundException异常一般就是编译时找不到类，Console台就会输出异常信息。一般情况下，我们都会rebuild或者clean一下工程，让项目重新编译一遍
+
+#### 常见异常
+
+>ArithmeticException (算术异常)
+>
+>MissingResourceException (丢失资源)
+>
+>ClassNotFoundException (找不到类)等异常
+>
+>ArithmeticException（除数为0的异常）
+>
+>BufferOverflowException（缓冲区上溢异常）
+>
+>BufferUnderflowException（缓冲区下溢异常）
+>
+>IndexOutOfBoundsException（下标越界异常）
+>
+>NullPointerException（空指针异常）
+>
+>EmptyStackException（空栈异常）,
+>
+>IllegalArgumentException（不合法的参数异常）
+>
+>NegativeArraySizeException
+>
+>NoSuchElementException
+>
+>SecurityException
+>
+>SystemException
+>
+>UndeclaredThrowableException
+
+#### Exceptiou关键字
+
+>try :捕获（Throwable，Exception，Error）
+>
+>catch:处理
+>
+>finally:无论程序执行与否，finally代码块最终都会执行
+>
+>throw:主动抛出
+>
+>throws:无法处理在方法申明抛出
+>
+>Throwable:异常超类
 

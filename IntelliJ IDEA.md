@@ -26,17 +26,21 @@
 
 
 
+#### 构建springboot项目连接超时
+
+* 将默认的地址更改为aliyun地址
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206201012703.png" alt="image-20220620101207601" style="zoom: 50%;" />
 
 
 
+#### 设置maven仓库默认地址
 
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206201021718.png" alt="image-20220620102142663" style="zoom:50%;" />
 
+配置maven
 
-
-
-
-
-
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206201023481.png" alt="image-20220620102316409" style="zoom: 50%;" />
 
 
 
@@ -76,7 +80,7 @@ IDEA默认启动配置主要考虑低配置用户，参数不高（默认最低1
 
 建议手动设置参数值
 
-### **电脑运行内存为8G的建议**
+电脑运行内存为8G的建议
 
 ```python3
 -server

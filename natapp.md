@@ -3,7 +3,7 @@
 1.在natapp命令窗口下输入natapp-authtoken="通道密钥"
 
 ```
-D: \>natapp -authtoken= fce29ca8lea18008
+D: \>natapp -authtoken=fce29ca8lea18008
 ```
 
 2.链接成功
