@@ -6,6 +6,8 @@
 
 ## yum安装docker
 
+* 默认安装路径[/var/lib/docker]
+
 >1.较旧的 Docker 版本称为 docker 或 docker-engine 。如果已安装这些程序，请卸载它们以及相关的依赖项。
 
 ```
@@ -176,12 +178,6 @@ docker commit -a="创建者" -m="提交信息" 容器id 自定义镜像名称:�
 
 
 
-
-
-
-
-
-
 ## 常用命令
 
 ```shell
@@ -206,7 +202,7 @@ systemctl restart docker   				  #重启Docker守护进程
 
 挂载信息
 
-![image-20220606112038985](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206061120157.png)
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206241434433.png" alt="image-20220624143405373" style="zoom:67%;" />
 
 * 具名挂载与匿名挂载
 
@@ -371,15 +367,28 @@ docker network connect 网络 容器 #将指定容器连接指定网络
 
 ## docker compose(容器编排)
 
-* ab安装docker compose
+* 安装docker compose
+* github下载
 
-```
+>curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+* 国内镜像
+
+>curl -L "https://get.daocloud.io/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+>
+>-$(uname -s)  #操作系统
+>
+>-$(uname -m) #操作系统位数
+
+*  授权，否则无操作权限
+
+>chmod 777 docker-compose
+
+* 版本号
+
+>docker-compose --version
 
 
-
-
-
-```
 
 
 
@@ -432,21 +441,56 @@ docker run -d -p 8088:9000\
 
 ## 练习
 
+* docker安装启动tomcat
+
+> docker run-d -p 3355:8080 --name mtomcat tomcat				
+
+* 进入tomcat容器
+
+>docker exec -it tomcat01 /bin/bash
+>cp webapps.dist/* webapps
 
 
-```shell
-#docker安装启动tomcat
-docker run-d -p 3355:8080 --name mtomcat tomcat
-#进入tomcat容器
-docker exec -it tomcat01 /bin/bash
-cp webapps.dist/* webapps
-#docker安装es+kibana
-docker run -d --name elasticsrerch01 -p 9200:9200 
-								  -p 9300:9300 
-								  -e "discovery.type=single-node"
-								  -e ES_JAVA_OPTS="-Xms64m -Xmx256m"
-                                     elasticsrerch:7.6.2								
-```
+
+
+
+<-------------------------------------------------------------------------------------------------->
+
+
+
+* docker安装es+kibana
+
+>docker run -d --name elasticsrerch01 -p 9200:9200 
+>								  -p 9300:9300 
+>								  -e "discovery.type=single-node"
+>								  -e ES_JAVA_OPTS="-Xms64m -Xmx256m"
+>                                     elasticsrerch:7.6.2
+
+<-------------------------------------------------------------------------------------------------->
+
+* docker安装MySQL
+
+>docker run -d \
+>--name mysql \
+>-p 3306:3306 \
+>-v /usr/local/docker/mysql/config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+>-v /usr/local/docker/mysql/data/mysql:/var/lib/mysql \
+>-e MYSQL_ROOT_PASSWORD=root\
+>mysql:5.7
+
+<-------------------------------------------------------------------------------------------------->
+
+* docker安装nacos
+
+>	docker  run --name nacos -d -p 8848:8848 --privileged=true --restart=always -e JVM_XMS=256m -e JVM_XMX=256m -e MODE=standalone -e PREFER_HOST_MODE=hostname nacos/nacos-server
+
+
+
+<-------------------------------------------------------------------------------------------------->
+
+* docker安装redis
+
+>docker run -p 6379:6379 --name myRedis  -v /data/redis/redis.conf:/etc/redis/redis.conf -v /data/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
 
 
 

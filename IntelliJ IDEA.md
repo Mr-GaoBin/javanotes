@@ -20,6 +20,12 @@
 
 ## 操作面板优化
 
+* target 目录
+
+>idea 的maven项目，打包后,项目 目录 没有 显示target **点击左边工程的 设置，弹出图片的框，勾上 show Exculded Files**,就可以看到target 目录 了
+
+
+
 #### 注释编辑
 
 <img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206171128016.png" alt="image-20220617112852914" style="zoom: 50%;" />

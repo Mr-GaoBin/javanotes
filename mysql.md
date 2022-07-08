@@ -102,12 +102,7 @@ create table 新表名 like 旧表名;
 			delete删除数据不会释放表空间，而truncate删除数据后重新创建表，释放表空间
 
 			delete删除数据后自增列继续累加；而truncate删除后自增列还原为初始值
-			
-			
-			
-			
-			
-			
+		
 ```
 
 ### drop和delete,truncate的区别

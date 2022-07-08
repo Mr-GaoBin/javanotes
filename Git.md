@@ -10,6 +10,7 @@ gut clone 仓库地址					 -- 克隆指定仓库到本地
 git add .
 git commit  -m"备注"                   -- 上传更新统一操作 
 git push
+git log                               -- 日志，可进行撤回
 ```
 
 ```

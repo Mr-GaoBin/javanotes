@@ -219,4 +219,3 @@ private String xxx;
 >2. @Repository 可有可无，可以消去依赖注入的报错信息。
 >3. @MapperScan 可以替代 @Mapper。
 
-## 

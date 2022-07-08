@@ -245,6 +245,25 @@ public class UserResource {
 }
 ```
 
+* 取值如果数据为空
+
+>1. 优先查看影响范围内注入的RedisTemplate对象是否一致！
+>2. 权限问题，如设置密码需配置相对应密码
+
+
+
+
+
+### LettuceConnectionFactory和RedisConnectionFactory
+
+>
+
+
+
+
+
+
+
 ## redis高可用和持久化
 
 ```

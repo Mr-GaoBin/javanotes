@@ -1,58 +1,16 @@
-#  java学习路线
-
-## mysql
-
-数据库的[Schema](https://so.csdn.net/so/search?q=Schema&spm=1001.2101.3001.7020)是一个数据库的设计的蓝图，他能够准确表述数据库的结构、数据类型、外键约束等信息。设计一个科学稳健的数据库Schema是开发任何程序或网站的非常重要一步。
-
-下面精心挑选的5款免费的数据库辅助设计工具。
-
-```
-dbdiagram.io
-draw.io
-Lucidchart
-SQLDBM
-QuickDBD
-```
+#  javaEE
 
 
 
 
 
-### RuoYi若依管理系统
 
-```
 
-```
 
-### JavaEE
-
-### jvm
-
-### gc
-
-### juc
-
-### jmm
 
  
 
-```
-# springboot整合
 
-# 相关技术
-
-
-* mybatis支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架
-* thymeleaf模板引擎
-* redis缓存数据库
-* jwt网络应用环境间传递声明而执行的一种基于JSON的开放标准(集成token实现验证)
-* elasticsearch搜索引擎
-* secrte安全验证
-*负载均衡
-*多线程高并发
-*RabbitMQ消息队列
-*Docker
-```
 
 
 
