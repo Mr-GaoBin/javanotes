@@ -76,6 +76,22 @@ User user = applicationContext.getBean("user", User.class);
 
 ### 二、Controller 相关注解
 
+
+
+* @ConfigurationProperties(prefix = “****“)
+
+>
+>
+>
+
+* @EnableCaching
+
+>
+>
+>
+
+
+
 ```java
 @Controller
 控制器，处理http请求。

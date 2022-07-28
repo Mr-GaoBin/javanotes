@@ -1,6 +1,8 @@
 # vue
 
->vuejs插件失效：复制Vue Single File C omponent文件生成格式，新建一个名称（Vue Component），扩展（vue）的类型生成右键选项
+* idea:vuejs插件失效
+
+>复制Vue Single File Component文件生成格式，新建一个名称（Vue Component），扩展（vue）的类型生成右键选项
 
 ## Soc原则（关注点分离）
 
@@ -16,6 +18,8 @@
 >●ElementUI、 iview、 ice: 饿了么出品，基于Vue的UI框架
 >●Bootstrap: Twitter推出的一个用于前端开发的开源工具包
 >●AmazeUI:又叫"妹子UI”，一款HTML5跨屏前端框架
+>
+>●iview
 
 ## JavaScript构建工具
 
@@ -28,80 +32,127 @@
 >●MVP (异步通信为主) : Model、 View、 Presenter
 >●MVVM (异步通信为主，: Model、 View、 ViewModel
 
-为了降低前端开发复杂度,涌现了大量的前端框架，比如: AngularJS(模块化)、 React（虚拟DOM）、 Vue.js(集大成者) 、
-EmberJS等，这些框架总的原则是先按类型分层，比如Templates、Controllers、 Models, 然后再
-在层内做切分
+为了降低前端开发复杂度,涌现了大量的前端框架，比如: AngularJS(模块化)、 React（虚拟DOM）、 Vue.js(集大成者) 、EmberJS等，这些框架总的原则是先按类型分层，比如Templates、Controllers、 Models, 然后再在层内做切分
 
 ## 787原则
 
-学习vue我们必须之到它的7个属性, 8个方法，以及7个指令。
+学习vue必须知道它的7个属性, 8个方法，以及7个指令。
 
-### ●el属性
+### el属性
 
 。用来指示vue编译器从什么地方开始解析vue的语法，可以说是一个占位符。
 
-### ●data属性
+### data属性
 
 。用来组织从view中抽象出来的属性，可以说将视图的数据抽象出来存放在data中。
 
-### ●template属性
+### template属性
 
 。用来设置模板，会替换页面元素， 包括占位符。
 
-### ●methods属性
+### methods属性
 
 。放置页面中的业务逻辑, js方法- 般都放置在methods中
 
-### ●render属性
+### render属性
 
 。创建真正的Virtual Dom
 
-### ●computed属性
+### computed属性
 
 。用来计算
 
-### ●watch属性
+### watch属性
 
 。watch:function(new,old){}
 。监听data中数据的变化
 。两个参数，一个返回新值，一个返回旧值,
 
-## 计算属性
+### 计算属性
+
+
+
+
+
+
 
 ## 插槽
 
-## node.js
 
-```
-C:\Users\74056>node -v
+
+
+
+
+
+
+
+
+
+
+
+## 安装node.js
+
+* node.js
+
+```shell
+node -v
 v16.13.1
-C:\Users\74056>npm -v
+npm -v
 8.1.2
+#获取registry镜像
+npm config get registry
+#设置registry镜像
+npm config set registry=镜像地址
 ```
 
-## 安装webpack（打包工具）
+### npm工具使用
 
-```java
+* npm安装element(ui框架）
+
+>npm i element-ui -s
+
+
+
+* npm安装cnpm（淘宝加速器）
+
+>npm install cnpm -g  
+>
+>-g :全局安装
+
+![image-20220712165934551](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202207121659697.png)
+
+
+
+* cnpm 安装vue-cli
+
+>cnpm install vue-cli -g
+
+
+
+* 创建项目模板类型
+
+>vue list
+
+![image-20220712170419645](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202207121704696.png)
+
+
+
+* npm安装webpack（打包工具）
+
+```shell
 ---下载地址admin/appdata/Roaming/npm---
 npm install cnpm -g
 npm install pnpm -g
 npm install webpack -g
-npm install webpack-cli -g						 --客户端 
-webpack -v								        --查看版本号 
-webpack-cli -v                                     --查看版本号
-cnpm install vue-cli -g
+#客户端
+npm install webpack-cli -g						  
+#查看版本号 
+webpack -v					
+#查看版本号
+webpack-cli -v                                     
 ```
 
-```
---> vue list                                           -- 项目模板
-  Available official templates:
-  ★  browserify - A full-featured Browserify + vueify setup with hot-reload, linting & unit testing.
-  ★  browserify-simple - A simple Browserify + vueify setup for quick prototyping.
-  ★  pwa - PWA template for vue-cli based on the webpack template
-  ★  simple - The simplest possible Vue setup in a single HTML file
-  ★  webpack - A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-  ★  webpack-simple - A simple Webpack + vue-loader setup for quick prototyping.
-```
+
 
 ### 初始化项目
 

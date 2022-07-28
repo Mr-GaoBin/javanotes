@@ -15,6 +15,14 @@
 @ComponentScan的功能其实就是自动扫描并加载符合条件的组件或bean定义，最终将这些bean定义加载到容器中。我们可以通过basePackages等属性指定@ComponentScan自动扫描的范围，如果不指定，则默认Spring框架实现从声明@ComponentScan所在类的package进行扫描，默认情况下是不指定的，所以SpringBoot的启动类最好放在root package下。
 ```
 
+
+
+
+
+>springBoot跨域注解 : @CrossOrigin
+
+
+
 ## pom
 
 ```xml

@@ -1,5 +1,38 @@
 # jwt
 
+
+
+
+
+用户登录时，系统会根据用户名，从存储设备查找该用户的密码及权限等，将其组装成一个UserDetails对象。并用UserDetails中的数据对用户进行认证，决定其输入的用户名/密码是否正确。
+
+```java
+#UserDetails源码
+public interface UserDetails extends Serializable {
+	Collection<? extends GrantedAuthority> getAuthorities();//权限 
+	String getPassword();    //密码
+	String getUsername();    //用户名
+ 
+	boolean isAccountNonExpired();   //账号是否未过期
+	boolean isAccountNonLocked();    //账号是否未锁定
+	boolean isCredentialsNonExpired();//密码是否未过期
+	boolean isEnabled();        //是否激活
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 什么是JWT
 
 ​		Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（[(RFC 7519](https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519)).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。

@@ -57,7 +57,7 @@ start explorer
 
 ![image-20220616170559865](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202206161705934.png)
 
-```
+```shell
 C:\Windows\System32\drivers\etc							    -- 修改本地host文件
 mrt                                                           -- 恶意删除检测
 %tepm%												     -- 缓存
@@ -67,14 +67,19 @@ ipconfig -flushdns                                           -- 刷新 DNS 解�
 ipconfig -displaydns							           -- 查看DNS缓存记录
 netstat -aon|findstr 11026							       -- 产看指定端口 
 taskkill -f -pid 9620 								       --关闭指定端口
-get-executionpolicy									       --计算机执行策略
-set-executionpolicy remotesigned                              -- 更改计算机执行策略
+#计算机当前执行策略
+get-executionpolicy									       
+#更改计算机执行策略
+set-executionpolicy 策略类型
+#全部策略
 Get-ExecutionPolicy -List
 ```
 
 ## PowerShell 执行策略
 
 这些策略的强制仅在 Windows 平台上发生。 PowerShell 执行策略如下所示：
+
+![image-20220720104828800](https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202207201048896.png)
 
 ### AllSigned
 

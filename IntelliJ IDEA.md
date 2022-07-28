@@ -15,6 +15,10 @@
 >Chinese (Simplified) Language Pack											     -- 汉化插件
 >
 >Chinese 																							-- 汉化插件
+>
+>Atom Material Icons																		  -- 图标插件
+
+
 
 
 

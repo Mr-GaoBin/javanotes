@@ -42,11 +42,13 @@ docker run -p 6379:6379
 #终端
 docker exec -it myRedis /bin/sh
 #登录
-docker exec -it myRedis Redis-cli -a 123456
+docker exec -it myRedis redis-cli -a 123456
 #密码
 -a
 #清空索引
 flushdb
+#切换索引
+select [index]
 ```
 
 * redis.conf
@@ -68,7 +70,7 @@ flushdb
   bind 127.0.0.1 -::1
   
   #保护模式
-  protected-mode no
+  x no
   
   #超时时间
   timeout 0
@@ -186,7 +188,7 @@ strlen name     -- 获取字符串长度
 
 ```
 @Autowired
-public StringRedisTemplate stringRedisTemplate;
+private StringRedisTemplate stringRedisTemplate;
 ```
 
 ```
