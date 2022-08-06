@@ -477,6 +477,17 @@ docker run -d -p 8088:9000\
 >-v /usr/local/docker/mysql/data/mysql:/var/lib/mysql \
 >-e MYSQL_ROOT_PASSWORD=root\
 >mysql:5.7
+>
+>```
+>docker run -p 3306:3306 --name mysql \
+>-v /data/mysql/log:/var/log/mysql \
+>-v /data/mysql/data:/var/lib/mysql \
+>-v /data/mysql/conf:/etc/mysql \
+>-e MYSQL_ROOT_PASSWORD=root \
+>-d mysql:5.7
+>```
+
+
 
 <-------------------------------------------------------------------------------------------------->
 

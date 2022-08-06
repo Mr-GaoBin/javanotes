@@ -585,6 +585,16 @@ kill id;
 
 
 
+>远程连接1153错误
+
+```shell
+set global max_allowed_packet=1000000000;
+set global net_buffer_length=1000000;
+FLUSH PRIVILEGES;
+```
+
+
+
 ```shell
 #查看innodb引擎的运行时信息
 show engine innodb status;

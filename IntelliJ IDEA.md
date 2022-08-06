@@ -4,19 +4,21 @@
 
 >gitee                                                                                                  -- gitee仓库
 >
->Free MyBatis plugin                                                                          -- mybatis代码生成插件
+>Free MyBatis plugin                                                                           -- mybatis代码生成插件
 >
->MyBatisCodeHelperPro(Marketplace Edition)								   -- mybatis代码生成插件
+>MyBatisCodeHelperPro(Marketplace Edition)								     -- mybatis代码生成插件
 >
->MyBatisX								 														  -- mybatis代码生成插
+>MyBatisX								 											               -- mybatis代码生成插
 >
 >Translation  										 											 -- 翻译插件
 >
->Chinese (Simplified) Language Pack											     -- 汉化插件
+>Chinese (Simplified) Language Pack											      -- 汉化插件
 >
 >Chinese 																							-- 汉化插件
 >
 >Atom Material Icons																		  -- 图标插件
+>
+>CodeGlancePro                                                                                  -- 代码缩略图
 
 
 

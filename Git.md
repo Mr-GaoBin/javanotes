@@ -2,11 +2,39 @@
 
 ### git常用命令
 
-```
-gut clone 仓库地址					 -- 克隆指定仓库到本地
-```
+
+
+
+
+>### 创建新分支dev
+>
+>git branch dev
+>
+>### 查看分支，创建成功
+>
+>git branch -a
+>
+>### 切换分支
+>
+>git checkout dev 
+>
+>### 设置本地分支追踪远程分支
+>
+>### 设置后，以后再push时，只需 git push 命令即可
+>
+>git push --set-upstream origin dev
+>
+>### 版本回退
+>
+>git reset
+>
+>git reset --hard c1bde88481c2d5de047052956062420283be0a36
+
+
 
 ```shell
+#克隆指定仓库到本地
+gut clone 仓库地址					 
 #获取远程更新
 $git fetch origin    
 ##把更新的内容合并到本地分支
