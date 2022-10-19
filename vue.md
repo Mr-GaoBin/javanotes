@@ -92,6 +92,14 @@
 
 ## 安装node.js
 
+### 插件
+
+>Vue Language Features (Volar)[代码提示]
+>
+>TypeScript Vue Plugin (Volar)
+>
+>
+
 * node.js
 
 ```shell
@@ -183,4 +191,16 @@ webpack-cli -v
 --> webpack                                       -- 项目打包
 --> (cnpm)npm install vue-router --save-dev       -- 安装路由插件
 ```
+
+
+
+
+
+```
+#vite构建项目
+npm init vite@latest
+@vue-cli构建项目
+```
+
+
 

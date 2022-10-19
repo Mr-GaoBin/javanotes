@@ -448,6 +448,50 @@ MySQL数据库备份方法
 
 ### 导入与导出
 
+```
+
+一、导出
+命令行下具体用法如下： 
+ 
+mysqldump -u用戶名 -p密码 -d 数据库名 表名 > 脚本名;
+ 
+  
+ 
+导出整个数据库结构和数据
+mysqldump -h localhost -uroot -p123456 database > dump.sql
+ 
+ 
+ 
+导出单个数据表结构和数据
+mysqldump -h localhost -uroot -p123456  database table > dump.sql
+ 
+ 
+ 
+ 
+ 
+导出整个数据库结构（不包含数据）
+mysqldump -h localhost -uroot -p123456  -d database > dump.sql
+ 
+ 
+ 
+导出单个数据表结构（不包含数据）
+mysqldump -h localhost -uroot -p123456  -d database table > dump.sql
+ 
+二、导入
+ 
+mysql -u用户名    -p密码    <  要导入的数据库数据(runoob.sql)
+ 
+mysql -uroot -p123456 < runoob.sql
+ 
+ 
+ 
+ 
+导入数据（注意sql文件的路径）
+source /home/abc/abc.sql;
+```
+
+
+
 可视化工具导入与导出
 
 导出MySQL
