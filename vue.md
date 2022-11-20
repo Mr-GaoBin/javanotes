@@ -204,3 +204,17 @@ npm init vite@latest
 
 
 
+
+
+
+
+>idea调试vue项目
+>
+><img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211021642183.png" alt="image-20221102164216088" style="zoom: 50%;" />
+>
+>配置调试信息，debug启动项目即可
+>
+><img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211021645664.png" alt="image-20221102164508598" style="zoom:50%;" />
+
+
+
