@@ -1,10 +1,6 @@
-# Gitee
+# Git使用相关
 
-### git常用命令
-
-
-
-
+## git常用命令
 
 >### 创建新分支dev
 >
@@ -55,7 +51,35 @@ git log                               -- 日志，可进行撤回
 git push -f origin master			  -- 强制更新
 ```
 
-## 上传gitee图片无法显示问题
+## 
+
+
+
+### Git工作流程
+
+>- 克隆 Git 资源作为工作目录。
+>- 在克隆的资源上添加或修改文件。
+>- 如果其他人修改了，你可以更新资源。
+>- 在提交前查看修改。
+>- 提交修改。
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211222223450.png" alt="image-20221122222318378" style="zoom:50%;" />
+
+
+
+### Git 工作区、暂存区和版本库
+
+>- **工作区：**就是你在电脑里能看到的目录。
+>- **暂存区：**英文叫 stage 或 index。一般存放在 **.git** 目录下的 index 文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。
+>- **版本库：**工作区有一个隐藏目录 **.git**，这个不算工作区，而是 Git 的版本库。
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211222225066.png" alt="image-20221122222528994" style="zoom:67%;" />
+
+
+
+
+
+## 部分图床配置
 
 #### 1. 腾讯云cos图床
 
@@ -70,3 +94,20 @@ git push -f origin master			  -- 强制更新
 >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
 >
 >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
+
+
+
+
+
+## --------------------------------------------------------《=练习=》-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
