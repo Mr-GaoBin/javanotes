@@ -200,6 +200,9 @@ webpack-cli -v
 #vite构建项目
 npm init vite@latest
 @vue-cli构建项目
+
+
+yarn create vite vue --template vue
 ```
 
 
@@ -208,7 +211,9 @@ npm init vite@latest
 
 
 
->idea调试vue项目
+### idea调试vue项目
+
+>需先在终端启动项目
 >
 ><img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211021642183.png" alt="image-20221102164216088" style="zoom: 50%;" />
 >

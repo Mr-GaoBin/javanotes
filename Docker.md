@@ -1,4 +1,4 @@
-# Docker
+# docker基础应用
 
 一个项目，开发和上线两套环境，应用环境配置费时费力，而且容易出问题。为了解决这问题，所谓开发即运维，就是开发人员使用 Docker 来解决 “它在我的机器可以正常运行” 的问题，它会将运行程序的相关配置打包（打包成 一个镜像），然后直接搬移到新的机器上运行。从而保证系统稳定性，提高部署效率。
 
@@ -32,9 +32,7 @@ yum install -y yum-utils \
 >3.安装阿里云镜像
 
 ```
-yum-config-manager \
-    --add-repo \
-    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
 >4.更新软件索引包
@@ -67,83 +65,96 @@ ps -aux|grep docker
 docker version
 ```
 
->查看docker主机所有镜像
+>#### docker镜像操作
 
-```
+```shell
+#查看docker主机所有镜像
 docker images
-
+-------------------------------------------------------------------------------------------------------
 (镜像仓库源)                                        (镜像标签)   (镜像ID)       (镜像创建时间)  (镜像大小)
 REPOSITORY                                             TAG       IMAGE ID       CREATED         SIZE
 registry.cn-hangzhou.aliyuncs.com/zhuyijun/oracle      19c       7b5eb4597688   19 months ago   6.61GB
 registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g   latest    3fa112fd3642   6 years ago     6.85GB
+-------------------------------------------------------------------------------------------------------
+#搜索镜像
+docker search 镜像名称								 
+# 下载镜像
+docker pull 镜像名称								
+# 删除指定多个镜像，id之间记住空格
+docker rmi -f 镜像id							     
+# 递归删除所有镜像
+docker rmi -f $(docker images -aq)					
+# 镜像构建历史
+docker history 镜像id                                  
 ```
 
->docker镜像操作
+>#### 容器 操作
 
 ```shell
-docker search 镜像名称								 # 搜索镜像
-docker pull 镜像名称								 # 下载镜像
-docker rmi -f 镜像id							       # 删除指定多个镜像，id之间记住空格
-docker rmi -f $(docker images -aq)					 # 递归删除所有镜像
-docker history 镜像id                                  # 镜像构建历史
-```
-
->启动和停止容器 
-
-```shell
-
-docker run --name 自定义容器名称 镜像名称 -it 			  -- 启动进入容器
-docker run -d -it --name 自定义容器名称 镜像名称          -- 后台方式运行
-—name="Name"										# 容器名字,用于区分容器
--d 												   # 后台运行
--it 											   # 使用交互方式运行,进入容器查看内容
+#启动进入容器
+docker run --name 自定义容器名称 镜像名称 -it 			  
+#后台方式运行
+docker run -d -it --name 自定义容器名称 镜像名称          -- 
+@ —name="Name" 容器名字,用于区分容器
+@ -d 后台运行
+@ -it 使用交互方式运行,进入容器查看内容
 
 # 指定容器端口(小写)								   
--p 容器端口
--p ip:主机端口:容器端口										 
--p 主机端口:容器端口(最常用)
+@ -p 容器端口
+@ -p ip:主机端口:容器端口										 
+@ -p 主机端口:容器端口(最常用)
 #随机指定端口(大写)
--P 													
+@ -P 													
 
- docker ps 		  				 					#列出当前正在运行的容器
- docker ps -a      				 					 #列出历史运行过的容器
- docker ps -n=条数 			    				    #显示最近创建的容器
- docker ps -q      				 					 #只显示容器的
- docker start 容器id               					# 启动容器
- docker restart 容器id             					# 重启容器
- docker stop 容器id			    				   # 关闭容器
- docker kill 容器id                					# 强制启动容器
- docker rm    	   				 					# 删除容器
- docker rm -f $(docker ps -aq)    					  # 删除所有容器
- docker ps -a -q|xargx docker rm  					  # 删除所有容器
- exit						    					# 退出容器
- Ctrl+p+q											# 不停止退出容器
-```
+#列出当前正在运行的容器
+docker ps 		  				 					
+#列出历史运行过的容器
+docker ps -a      				 					 
+#显示最近创建的容器
+docker ps -n=条数 			    				   
+#只显示容器的
+docker ps -q      				 					
+# 启动容器
+docker start 容器id               					
+# 重启容器
+docker restart 容器id             					
+# 关闭容器
+docker stop 容器id			    				  
+# 强制启动容器
+docker kill 容器id                					
+# 删除容器
+docker rm images	   				 					
+# 删除所有容器
+docker rm -f $(docker ps -aq)    					  
+# 删除所有容器
+docker ps -a -q|xargx docker rm  					 
+# 删除所有停止的容器
+docker container prune
+#退出容器
+exit						    					
+#不停止退出容器
+Ctrl+p+q	
 
->进入容器
 
-```shell
-#开启新的终端
+#开启新的终端进入容器
 docker exec -it 容器id  /bin/bash
-#正在执行的容器
+#进入正在执行的容器，退出会停止容器
 docker attach 容器id 
-```
 
->拷贝容器文件到主机
-
-```shell
+#拷贝容器文件到主机
 docker cp 容器id:容器内路径 主机路径
 ```
 
- 
 
->日志
+
+>#### 日志
 
 ```shell
 #输出日志
 docker logs	容器id
-#出日志格式
-docker logs	--help	
+#日志帮助命令
+docker logs	--help
+#出日志格式	
 Options:
       --details        Show extra details provided to logs
   -f, --follow         Follow log output
@@ -176,18 +187,38 @@ docker inspect --format "{{.state.pid}}" nginx0
 docker commit -a="创建者" -m="提交信息" 容器id 自定义镜像名称:版本号
 ```
 
+>卸载docker
+
+```shell
+# 卸载依赖
+yum remove docker-ce docker-ce-cli containerd.io
+# 删除资源
+rm -rf /var/lib/docker
+rm -rf /etv/docker
+#  /var/lib/docker     docker的默认工作路径！！！
+```
+
 
 
 ## 常用命令
 
 ```shell
-docker 命令 --help					   -- 帮助命令
-docker stats                         	   # docker内存使用情况
-yum -y update 							# 更新docker
-docker info								# docker信息
-systemctl start docker     				  #运行Docker守护进程
-systemctl stop docker      				  #停止Docker守护进程
-systemctl restart docker   				  #重启Docker守护进程
+#帮助命令
+docker 命令 --help					   
+# docker内存使用情况
+docker stats                         	  
+# 更新docker
+yum -y update 							
+# docker信息
+docker info								
+#运行Docker守护进程
+systemctl start docker     				  
+#停止Docker守护进程
+systemctl stop docker      				 
+#重启Docker守护进程
+systemctl restart docker   				  
+#docker运行状态
+systemctl status docker
 ```
 
 
@@ -413,16 +444,6 @@ docker network connect 网络 容器 #将指定容器连接指定网络
 
 ## docker swarm
 
-## 卸载Docker
-
-```shell
-# 卸载依赖
-yum remove docker-ce docker-ce-cli containerd.io
-# 删除资源
-rm -rf /var/lib/docker
-#  /var/lib/docker     docker的默认工作路径！！！
-```
-
 ## docker可视化工具
 
 * portainer
@@ -441,9 +462,43 @@ docker run -d -p 8088:9000\
 
 ## 练习
 
+### docker安装rabbitmq
+
+```shell
+#启动容器
+docker run -d -p 5672:5672 -p 15672:15672 --name rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:3.8.16
+#开启插件
+docker exec -it rabbitmq rabbitmq-plugins enable rabbitmq_management
+
+
+
+#rabbitmq有一个默认的用户名和密码，guest和guest,但为了安全考虑，该用户名和密码只允许本地访问，如果是远程操作的话，需要创建新的用户名和密码
+docker run -di --name rabbitmq -p 5672:5672 -p 15672:15672 -v `pwd`/rabbitmq:/var/lib/rabbitmq --hostname myRabbit -e RABBITMQ_DEFAULT_VHOST=myvhost -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:3.7.14-management
+
+说明：
+-i：表示运行容器
+-d：在run后面加上-d参数,则会创建一个守护式容器在后台运行（这样创建容器后不会自动登录容器，如果只加-it两个参数，创建后就会自动进去容器）。
+-di：后台运行容器；
+--name：指定容器名；
+-p：指定服务运行的端口（5672：应用访问端口；15672：控制台Web端口号）；
+-v：映射目录或文件（文件共享），格式 宿主机目录：容器目录
+--hostname：主机名（RabbitMQ的一个重要注意事项是它根据所谓的 “节点名称” 存储数据，默认为主机名）；
+-e 指定环境变量；（RABBITMQ_DEFAULT_VHOST：默认虚拟机名；RABBITMQ_DEFAULT_USER：默认的用户名；RABBITMQ_DEFAULT_PASS：默认用户名的密码）
+
+
+#
+docker cp /usrupload/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez rabbitmq:/plugins
+
+
+```
+
+
+
+
+
 * docker安装启动tomcat
 
-> docker run-d -p 3355:8080 --name mtomcat tomcat				
+> docker run -d -p 3355:8080 --name mtomcat tomcat				
 
 * 进入tomcat容器
 
@@ -516,4 +571,54 @@ docker run -d -p 8088:9000\
 
 
 ```
+
+
+
+
+
+
+
+### 阿里云服务器与docke虚拟网段冲突问题
+
+```shell
+touch /etc/docker/daemon.json
+
+#编辑{"bip": "192.168.1.5/24"}
+#重启docke
+systemctl restart docker
+```
+
+<img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202301091013822.png" alt="image-20230109101351717" style="zoom:67%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

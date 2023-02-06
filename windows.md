@@ -1,5 +1,28 @@
 # windows
 
+
+
+```shell
+#windows镜像下载
+ed2k://|file|cn_windows_10_business_editions_version_20h2_updated_april_2021_x64_dvd_0a0fc490.iso|6165831680|9B4B918A840F845A43DD476FCEC3E421|/
+```
+
+
+
+
+
+## DirectX自检工具
+
+>## 命令窗口输入--> dxdiag
+>
+><img src="https://mapstore-1307680469.cos.ap-chongqing.myqcloud.com/img/202211240106476.png" alt="image-20221124010615383" style="zoom: 50%;" />
+
+
+
+
+
+
+
 ## 快捷键
 
 ```

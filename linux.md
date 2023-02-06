@@ -149,6 +149,41 @@ pstree -pu						      -- 进程数
 kill -9 进程id						--强制结束进程
 ```
 
+
+
+>#### 访问指定地址命令
+
+```shell
+#elinks - lynx-like替代角色模式WWW的浏览器
+elinks --dump http://www.baidu.com
+
+#wget 这个会将访问的首页下载到本地
+[root@el5-mq2 ~]# wget http://www.baidu.com
+--2011-10-17 16:30:10--  http://www.baidu.com/
+Resolving www.baidu.com... 119.75.218.45, 119.75.217.56
+Connecting to www.baidu.com|119.75.218.45|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 8403 (8.2K) [text/html]
+Saving to: `index.html'
+100%[==========================================================================================>] 8,403       --.-K/s   in 0.01s  
+2011-10-17 16:30:10 (648 KB/s) - `index.html' saved [8403/8403]
+
+#curl会显示出源码
+curl http://www.baidu.com/index.html
+
+#lynx（这个以前在群里面见有人讨论过，但是没有尝试过，想用的话还需要下载软件）
+lynx http://www.baidu.com
+
+```
+
+
+
+
+
+
+
+
+
 >### 环境变量命令
 
 ```
@@ -395,19 +430,35 @@ cd bin												   -- 进入目录目录
 ./startup.sh										   -- 停止
 ```
 
+### 防火墙
+
 查看防火墙当前开启了那些端口
 
-```
-firewall-cmd --state									 -- 防火墙状态
-systemctl start firewalld								 -- 开启防火墙
-firewall-cmd --zone=public --add-port=6379/tcp --permanent  --开启端口
-systemctl restart firewal1d.service                        -- 重启防火墙
-firewall-cmd --reload									-- 重启防火墙
-firewall-cmd --list-ports								--查看防火墙当前开启了那些端口
+```shell
+#防火墙状态
+firewall-cmd --state									 
+#开启防火墙
+systemctl start firewalld								 -
+#重启防火墙
+systemctl restart firewalld
 
+#开启端口
+firewall-cmd --zone=public --add-port=6379/tcp --permanent 
+@ zone=public：表示作用域为公共的；
+@ add-port=8080/tcp：添加tcp协议的端口8080；
+@ permanent：永久生效，如果没有此参数，则只能维持当前服务生命周期内，重新启动后失效；
 
-lsof -i:端口号                                             -- 当前被占用的端口
-kill -9 PID                                                -- 杀掉进程
+#重启防火墙
+systemctl restart firewal1d.service                        
+#重启防火墙
+firewall-cmd --reload									
+#查看防火墙当前开启了那些端口
+firewall-cmd --list-ports								
+
+#当前端口被占用的
+lsof -i:端口号                                             
+杀掉进程
+kill -9 PID                                                
 ```
 
 ### 用户和组
