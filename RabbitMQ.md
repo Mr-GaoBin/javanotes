@@ -1,6 +1,6 @@
 # rabbitmq
 
-## windows环境安装
+### windows环境安装
 
 erlang环境安装
 
@@ -48,7 +48,7 @@ http://localhost:15672/
 
 
 
-## rabbitmq支持消息的模式
+### rabbitmq支持消息的模式
 
 #### 1.简单模式Simple
 
@@ -168,3 +168,136 @@ rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 
 
+### 源码学习
+
+### RabbitAdmin 与 RabbitTemplate 使用
+
+>## RabbitAdmin
+>
+>* 该类封装了对 RabbitMQ 的管理操作
+>
+>```java
+>@Bean
+>public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
+>    return new RabbitAdmin(connectionFactory);
+>}
+> 
+>@Autowired
+>private RabbitAdmin rabbitAdmin;
+>```
+>
+>
+>
+>* Exchange 操作
+>
+>1. 创建四种类型的 Exchange，均为持久化，不自动删除
+>2. rabbitAdmin.declareExchange(new DirectExchange("direct.exchange",true,false));
+>3. rabbitAdmin.declareExchange(new TopicExchange("topic.exchange",true,false));
+>4. rabbitAdmin.declareExchange(new FanoutExchange("fanout.exchange",true,false));
+>5. rabbitAdmin.declareExchange(new HeadersExchange("header.exchange",true,false));
+>6. 删除 Exchange
+>7. rabbitAdmin.deleteExchange("header.exchange");
+>
+>
+>
+>* Queue 操作
+>
+>1. 定义队列，均为持久化
+>2. rabbitAdmin.declareQueue(new Queue("debug",true));
+>3. rabbitAdmin.declareQueue(new Queue("info",true));
+>4. rabbitAdmin.declareQueue(new Queue("error",true));
+>5. //删除队列      rabbitAdmin.deleteQueue("debug");
+>6. //将队列中的消息全消费掉
+>7. rabbitAdmin.purgeQueue("info",false);
+>
+>- Binding 绑定
+>
+>```java
+>//绑定队列到交换器，通过路由键
+>rabbitAdmin.declareBinding(new Binding("debug",Binding.DestinationType.QUEUE,
+>        "direct.exchange","key.1",new HashMap()));
+> 
+>rabbitAdmin.declareBinding(new Binding("info",Binding.DestinationType.QUEUE,
+>        "direct.exchange","key.2",new HashMap()));
+> 
+>rabbitAdmin.declareBinding(new Binding("error",Binding.DestinationType.QUEUE,
+>        "direct.exchange","key.3",new HashMap()));
+> 
+>//进行解绑
+>rabbitAdmin.removeBinding(BindingBuilder.bind(new Queue("info")).
+>        to(new TopicExchange("direct.exchange")).with("key.2"));
+> 
+>//使用BindingBuilder进行绑定
+>rabbitAdmin.declareBinding(BindingBuilder.bind(new Queue("info")).
+>        to(new TopicExchange("topic.exchange")).with("key.#"));
+> 
+>//声明topic类型的exchange
+>rabbitAdmin.declareExchange(new TopicExchange("exchange1",true,false));
+>rabbitAdmin.declareExchange(new TopicExchange("exchange2",true,false));
+> 
+>//exchange与exchange绑定
+>rabbitAdmin.declareBinding(new Binding("exchange1",Binding.DestinationType.EXCHANGE,
+>        "exchange2","key.4",new HashMap()));
+>```
+
+
+
+>## RabbitTemplate
+>
+>* Spring AMQP 提供了 RabbitTemplate 来简化 RabbitMQ 发送和接收消息操作
+>
+>```java
+>@Autowired
+>private RabbitAdmin rabbitAdmin;
+>```
+>
+>#### 发送消息
+>
+>- send （自定义消息 Message）
+>
+>1. Message message = new Message("hello".getBytes(),new MessageProperties());
+>2. // 发送消息到默认的交换器，默认的路由键
+>3. rabbitTemplate.send(message);
+>4. // 发送消息到指定的交换器，指定的路由键
+>5. rabbitTemplate.send("direct.exchange","key.1",message);
+>6. // 发送消息到指定的交换器，指定的路由键
+>7. rabbitTemplate.send("direct.exchange","key.1",message,new CorrelationData(UUID.randomUUID().toString()));
+>
+>* convertAndSend（自动 Java 对象包装成 Message 对象，Java 对象需要实现 Serializable 序列化接口）
+>
+>```java
+>User user = new User("linyuan");
+>// 发送消息到默认的交换器，默认的路由键
+>rabbitTemplate.convertAndSend(user);
+>// 发送消息到指定的交换器，指定的路由键，设置消息 ID
+>rabbitTemplate.convertAndSend("direct.exchange","key.1",user,new CorrelationData(UUID.randomUUID().toString()));
+>// 发送消息到指定的交换器，指定的路由键，在消息转换完成后，通过 MessagePostProcessor 来添加属性
+>rabbitTemplate.convertAndSend("direct.exchange","key.1",user,mes -> {
+>    mes.getMessageProperties().setDeliveryMode(MessageDeliveryMode.NON_PERSISTENT);
+>        return mes;
+>});
+>```
+>
+>#### 接收消息
+>
+>- receive（返回 Message 对象）
+>
+>1. // 接收来自指定队列的消息，并设置超时时间
+>
+>2. Message msg = rabbitTemplate.receive("debug",2000l);
+>
+>   
+>
+>- receiveAndConvert（将返回 Message 转换成 Java 对象）
+>
+>```java
+>User user = (User) rabbitTemplate.receiveAndConvert();
+>```
+>
+>
+
+>## AmqpTemplate	
+>
+>AmqpTemplate
+>
+>  就像Spring Framework和其它一些项目提供了一些高度抽象，Spring AMQP提供的‘template’扮演者关键的角色。定义者主要操作的接口是AmqpTemplate。这些操作包含了发送和接收消息的一般操作。换种说法，它们不是某个实现所专有的，所以AMQP存在于名称里。这个接口的实现与AMQP协议的实现紧密关联。不像JMS，本身是一个接口级别的API，而AMQP是一个wire-level的协议。这个协议的实现必须提供他们自己的客户端类库，所以模板接口的每一个实现必须依赖一个特定的客户端类库。到目前为止，仅仅存在一个实现：RabbitTemplate。在下面的例子中，你将看到AmqpTemplate的使用，但是当你看到例子的配置，或者一些代码template的初始化或者设定的时候，你会看到实现类型RabbitTemplate。
